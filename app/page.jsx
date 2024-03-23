@@ -1,9 +1,7 @@
 'use client'
 
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useState } from "react";
-
-const apiKey = process.env.NEXT_GEMINI_API_KEY;
+import Button from '@components/button'
 
 const Home = () => {
   const [formData, setFormData] = useState({
@@ -12,25 +10,9 @@ const Home = () => {
   });
   const [text, setText] = useState('');
 
-  const genAI = new GoogleGenerativeAI(apiKey);
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
-  };
-
-  const getContext = async () => {
-    try {
-      const { trend, section } = formData;
-      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-      const prompt = `Why is ${trend} currently trending in the ${section} section on twitter?`;
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      const generatedText = response.text();
-      setText(generatedText);
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   return (
@@ -50,9 +32,7 @@ const Home = () => {
           onChange={handleChange}
           placeholder="Topic section"
         />
-        <button onClick={getContext} disabled={!formData.trend || !formData.section}>
-          Get Context
-        </button>
+        <Button setText={setText} formData={formData} />
       </section>
       <section>{text}</section>
     </main>
@@ -60,7 +40,3 @@ const Home = () => {
 };
 
 export default Home;
-
-
-
-
