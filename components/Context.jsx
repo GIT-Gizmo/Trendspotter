@@ -17,6 +17,7 @@ const Context = ({ setGeneratedText, formData }) => {
         try {
           setIsFetching(true);
           const { trend, section } = formData;
+          if (!trend || !section) alert("Please type in a trending topic and a section");
           const model = genAI.getGenerativeModel({ model: "gemini-pro" });
           const prompt = `Why is ${trend} currently trending in the ${section} section on twitter?`;
           const result = await model.generateContent(prompt);
@@ -36,7 +37,7 @@ const Context = ({ setGeneratedText, formData }) => {
                 <Button className="flex items-center gap-2" disabled={isFetching}>
                     Fetching Context...<Spinner />
                 </Button> ) : (
-                <Button onClick={getContext} disabled={!formData.trend || !formData.section}>
+                <Button className="dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-100" onClick={getContext}>
                     Get Context
                 </Button>
             )

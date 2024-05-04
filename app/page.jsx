@@ -100,7 +100,7 @@ const Home = () => {
               <Card className="h-full w-full">
                 <CardHeader>
                   <CardTitle>Trending Topic Context</CardTitle>
-                  <CardDescription>Our AI has analyzed the latest trending topic and provided context.</CardDescription>
+                  <CardDescription>Gemini AI will analyze the latest trending topic and provided context.</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
@@ -110,9 +110,9 @@ const Home = () => {
                     </div>
                     <div>
                       <h3 className="text-lg font-bold">Context</h3>
-                        <p className="text-gray-500 dark:text-gray-400" placeholder="Context will appear here">
+                        <div className="relative before:absolute before:left-0 before:top-0 before:text-gray-400 before:opacity-60 before:content-[attr(data-placeholder)] text-gray-500 dark:text-gray-400 border border-gray-800 rounded-md p-2 w-full h-40 placeholder:text-gray-500" data-placeholder="Context will appear here">
                           {generatedText}
-                        </p>
+                        </div>
                       {/* {isFetching ? (
                         <p className="text-gray-500 dark:text-gray-400"><Spinner /></p>
                         ) : (
@@ -122,13 +122,13 @@ const Home = () => {
                         )
                       } */}
                     </div>
-                    <div>
+                    {/* <div>
                       <h3 className="text-lg font-bold">Sentiment</h3>
                       <p className="text-gray-500 dark:text-gray-400">
                         The overall sentiment around the #{formData.trend} hashtag is positive, as users are generally
                         excited about the platform improvements.
                       </p>
-                    </div>
+                    </div> */}
                   </div>
                 </CardContent>
               </Card>
