@@ -110,7 +110,7 @@ const Home = () => {
                     </div>
                     <div>
                       <h3 className="text-lg font-bold">Context</h3>
-                        <div className="relative before:absolute before:left-0 before:top-0 before:text-gray-400 before:opacity-60 before:content-[attr(data-placeholder)] text-gray-500 dark:text-gray-400 border border-gray-800 rounded-md p-2 w-full h-40 placeholder:text-gray-500" data-placeholder="Context will appear here">
+                        <div className="relative before:absolute before:left-0 before:top-0 before:text-gray-400 before:opacity-60 before:content-[attr(data-placeholder)] text-gray-500 dark:text-gray-400 border border-gray-800 rounded-md p-2 w-full min-h-40 h-fit placeholder:text-gray-500" data-placeholder="Context will appear here">
                           {generatedText}
                         </div>
                       {/* {isFetching ? (
