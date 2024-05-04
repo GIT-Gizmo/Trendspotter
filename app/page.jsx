@@ -3,9 +3,8 @@
 import { useState } from "react";
 
 import { Input } from "@components/ui/input"
-import { Button } from "@components/ui/button"
 import { CardTitle, CardDescription, CardHeader, CardContent, Card } from "@components/ui/card"
-import Spinner from "@components/ui/spinner"
+import Button from "@components/Context"
 
 const Home = () => {
   const [formData, setFormData] = useState({
@@ -13,40 +12,39 @@ const Home = () => {
     section: '',
   });
   const [generatedText, setGeneratedText] = useState('');
-  const [isFetching, setIsFetching] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
-  const fetchContext = async () => {
-    setIsFetching(true);
-    setGeneratedText('');
+  // const fetchContext = async () => {
+  //   setIsFetching(true);
+  //   setGeneratedText('');
 
-    try {
-      const response = await fetch("/api/context", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+  //   try {
+  //     const response = await fetch("/api/context", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(formData),
+  //     });
       
-      if (response.ok) {
-        const data = await response.json();
-        setGeneratedText(data.text)
-        console.log(data);
-      } 
-      else {
-        throw new Error("Failed to fetch context");
-      }
-    } catch (error) {
-      console.error("Error fetching context:", error);
-    } finally {
-      setIsFetching(false);
-    }
-  }
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       setGeneratedText(data.text)
+  //       console.log(data);
+  //     } 
+  //     else {
+  //       throw new Error("Failed to fetch context");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching context:", error);
+  //   } finally {
+  //     setIsFetching(false);
+  //   }
+  // }
 
   return (
   <main className="w-full">
@@ -81,7 +79,11 @@ const Home = () => {
                     placeholder="Enter a topic section" type="text"
                   />
                 </div>
-                {isFetching ? (
+                <Button
+                  setGeneratedText={setGeneratedText}
+                  formData={formData}
+                />
+                {/* {isFetching ? (
                   <Button className="flex items-center gap-2" disabled={isFetching}>Fetching Context...<Spinner /></Button>
                   ) : (
                   <Button
@@ -91,7 +93,7 @@ const Home = () => {
                     Generate Context
                   </Button>
                   )
-                }
+                } */}
               </div>
             </div>
             <div className="flex flex-col justify-center space-y-4">
@@ -108,14 +110,17 @@ const Home = () => {
                     </div>
                     <div>
                       <h3 className="text-lg font-bold">Context</h3>
-                      {isFetching ? (
+                        <p className="text-gray-500 dark:text-gray-400" placeholder="Context will appear here">
+                          {generatedText}
+                        </p>
+                      {/* {isFetching ? (
                         <p className="text-gray-500 dark:text-gray-400"><Spinner /></p>
                         ) : (
                           <p className="text-gray-500 dark:text-gray-400" placeholder="Context will appear here">
                           {generatedText}
                           </p>
                         )
-                      }
+                      } */}
                     </div>
                     <div>
                       <h3 className="text-lg font-bold">Sentiment</h3>

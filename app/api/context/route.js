@@ -4,7 +4,7 @@ const apiKey = process.env.NEXT_GEMINI_API_KEY;
 
 const genAI = new GoogleGenerativeAI(apiKey);
 
-const getContext = async (req, res) => {
+const handler = async (req, res) => {
     try {
         const { trend, section } = req.body;
         const model = genAI.getGenerativeModel({ model: "gemini-pro" });
@@ -20,4 +20,4 @@ const getContext = async (req, res) => {
     }
 };
 
-getContext();
+export default handler;
