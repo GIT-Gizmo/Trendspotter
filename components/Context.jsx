@@ -18,7 +18,7 @@ const Context = ({ setGeneratedText, formData }) => {
           setIsFetching(true);
           const { trend, section } = formData;
           if (!trend || !section) alert("Please type in a trending topic and a section");
-          const model = genAI.getGenerativeModel({ model: "gemini-ultra" });
+          const model = genAI.getGenerativeModel({ model: "gemini-pro" });
           const prompt = `Why is ${trend} currently trending in the ${section} section on twitter?`;
           const result = await model.generateContent(prompt);
           const response = await result.response;

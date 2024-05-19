@@ -7,7 +7,7 @@ const genAI = new GoogleGenerativeAI(apiKey);
 const handler = async (req, res) => {
     try {
         const { trend, section } = req.body;
-        const model = genAI.getGenerativeModel({ model: "gemini-ultra" });
+        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
         const prompt = `Why is ${trend} currently trending in the ${section} section on twitter?`;
         const result = await model.generateContent(prompt);
         const response = result.response;
